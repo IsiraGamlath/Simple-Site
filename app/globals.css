@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #1b120b;
+  --surface: #241a10;
+  --surface-2: #2c2013;
+  --paper: #f3e9dc;
+  --muted: #b8a48c;
+  --ember: #e8703a;
+  --ember-dim: #7a3d20;
+  --line: #3a2a19;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-paper: var(--paper);
+  --color-muted: var(--muted);
+  --color-ember: var(--ember);
+  --color-ember-dim: var(--ember-dim);
+  --color-line: var(--line);
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: var(--font-body);
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.01em;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--ember);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
