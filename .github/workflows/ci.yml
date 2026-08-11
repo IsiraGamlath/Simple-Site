@@ -64,10 +64,27 @@ jobs:
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
 
-      - name: Deploy to Amazon ECS
+      - name: Download current ECS task definition
         if: github.event_name == 'push'
         run: |
-           aws ecs update-service \
-            --cluster simple-site-cluster \
-            --service simple-site-service \
-            --force-new-deployment      
+          aws ecs describe-task-definition \
+            --task-definition simple-site \
+            --query taskDefinition > task-definition.json
+
+      - name: Update ECS task definition image
+        if: github.event_name == 'push'
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: simple-site
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+
+      - name: Deploy to Amazon ECS
+        if: github.event_name == 'push'
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: simple-site-service
+          cluster: simple-site-cluster
+          wait-for-service-stability: true
