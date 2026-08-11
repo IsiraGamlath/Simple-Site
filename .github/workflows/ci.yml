@@ -63,3 +63,11 @@ jobs:
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+
+      - name: Deploy to Amazon ECS
+         if: github.event_name == 'push'
+        run: |
+           aws ecs update-service \
+            --cluster simple-site-cluster \
+            --service simple-site-service \
+            --force-new-deployment      
