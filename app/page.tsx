@@ -82,7 +82,7 @@ export default function Home() {
               What we pour
             </h2>
             <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted">
-              Bens rotate with the season — the board out front is always a
+              Beans rotate with the season — the board out front is always a
               day behind what&apos;s brewing.
             </p>
             <div className="mt-16">
