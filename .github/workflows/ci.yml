@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 env:
-  AWS_REGION: us-north-1
+  AWS_REGION: eu-north-1
   ECR_REPOSITORY: simple-site
 
 jobs:
