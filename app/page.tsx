@@ -83,7 +83,7 @@ export default function Home() {
             </h2>
             <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted">
               Beans rotate with the season — the board out front is always a
-              day behind what's brewing.
+              day behind what&apos;s brewing.
             </p>
             <div className="mt-16">
               <MenuList />
